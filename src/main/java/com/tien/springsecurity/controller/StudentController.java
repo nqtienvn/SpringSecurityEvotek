@@ -26,7 +26,7 @@ public class StudentController {
         return listOfStudent;
     }
     @PostMapping("/students")
-    public Student createStudetn(@RequestBody Student student) {
+    public Student createStudent(@RequestBody Student student) {
         listOfStudent.add(student);
         return student;
     }
