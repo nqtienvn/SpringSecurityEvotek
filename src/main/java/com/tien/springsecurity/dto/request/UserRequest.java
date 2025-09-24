@@ -1,13 +1,20 @@
 package com.tien.springsecurity.dto.request;
 
+import com.tien.springsecurity.entity.Role;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRequest {
-    String name;
-    String password;
+    String firstName;
+    String lastName;
+    String email;
+    String pass;
+    Role role;
 }

@@ -1,6 +1,9 @@
 package com.tien.springsecurity.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 public interface JwtService {
-   String generateToken(String name);
-    boolean validateToken(String token);
+   String generateToken(UserDetails userDetails);
+    boolean validateToken(String token, UserDetails userDetails);
+    String extractUsername(String token);
 }

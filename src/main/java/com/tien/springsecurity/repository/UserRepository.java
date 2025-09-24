@@ -4,8 +4,10 @@ import com.tien.springsecurity.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-        User findByName(String name);
-        boolean existsUserByName(String name);
+    Optional<User> findUserByEmailIs(String email);
+    boolean existsUserByEmail(String email);
     }

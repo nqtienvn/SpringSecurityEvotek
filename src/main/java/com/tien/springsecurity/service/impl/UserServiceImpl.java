@@ -2,6 +2,7 @@ package com.tien.springsecurity.service.impl;
 
 import com.tien.springsecurity.dto.request.UserRequest;
 import com.tien.springsecurity.dto.response.UserResponse;
+import com.tien.springsecurity.entity.Role;
 import com.tien.springsecurity.entity.User;
 import com.tien.springsecurity.mapper.UserMapper;
 import com.tien.springsecurity.repository.UserRepository;
@@ -22,11 +23,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse registerUser(UserRequest userRequest) {
-        if (userRepository.existsUserByName(userRequest.getName())) {
+        if (userRepository.existsUserByEmail(userRequest.getEmail())) {
             throw new RuntimeException("user is existed");
         }
         User user = userMapper.toUser(userRequest);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPass(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         userRepository.save(user);
         return userMapper.toUserResponse(user);
     }
