@@ -16,5 +16,5 @@ public class UserRequest {
     String lastName;
     String email;
     String pass;
-    Role role;
+//    Role role;
 }

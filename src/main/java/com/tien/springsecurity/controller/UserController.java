@@ -50,7 +50,7 @@ public class UserController {
                 .build();
     }
     @DeleteMapping("/users/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasPermission(#id, 'User', 'ROLE_ADMIN')")
     public ApiResponse<?> deleteUser(@PathVariable(name = "id") int id) {
         userService.deleteUser(id);
         return ApiResponse.builder()
