@@ -1,6 +1,7 @@
 package com.tien.springsecurity.controller;
 
 import com.tien.springsecurity.dto.request.UserRequest;
+import com.tien.springsecurity.dto.request.UserRoleRequest;
 import com.tien.springsecurity.dto.response.ApiResponse;
 import com.tien.springsecurity.dto.response.UserResponse;
 import com.tien.springsecurity.service.UserService;
@@ -32,7 +33,7 @@ public class UserController {
     }
     //chỉ cho phép admin truy cập vào enpoint này
     @GetMapping("/users")
-    @PreAuthorize("hasRole('ADMIN')") //cái này sẽ so sánh với thằng userdetails
+    @PreAuthorize("hasAuthority('USER_VIEW')") //cái này sẽ so sánh với thằng userdetails
     public ApiResponse<List<UserResponse>> getAllUser() {
         return ApiResponse.<List<UserResponse>>builder()
                 .code(200)
@@ -41,7 +42,7 @@ public class UserController {
                 .build();
     }
     @PutMapping("/users/{id}") //spEL
-    @PreAuthorize("hasRole('USER') and #userRequest.email == principal.username")
+    @PreAuthorize("hasAuthority('USER_UPDATE')")
     public ApiResponse<UserResponse> updateUser(@RequestBody UserRequest userRequest,@PathVariable(name = "id") int id) {
         return ApiResponse.<UserResponse>builder()
                 .code(200)
@@ -50,7 +51,7 @@ public class UserController {
                 .build();
     }
     @DeleteMapping("/users/{id}")
-    @PreAuthorize("hasPermission(#id, 'User', 'ROLE_ADMIN')")
+    @PreAuthorize("hasPermission(#id, 'User', 'USER_DELETE')")
     public ApiResponse<?> deleteUser(@PathVariable(name = "id") int id) {
         userService.deleteUser(id);
         return ApiResponse.builder()
@@ -65,6 +66,24 @@ public class UserController {
                 .code(200)
                 .message("success")
                 .result(userService.getMyInfo())
+                .build();
+    }
+    @PutMapping("/users/role/{id}")
+    @PreAuthorize("hasAuthority('USER_ROLE_UPDATE')")
+    public ApiResponse<UserResponse> updateRole(@RequestBody UserRoleRequest userRoleRequest, @PathVariable(name = "id") int id) {
+        return ApiResponse.<UserResponse>builder()
+                .code(200)
+                .message("success")
+                .result(userService.updateRoleforUser(id, userRoleRequest))
+                .build();
+    }
+    @PostMapping("/users/role/{id}")
+    @PreAuthorize("hasAuthority('USER_ROLE_ADD')")
+    public ApiResponse<UserResponse> addRole(@RequestBody UserRoleRequest userRoleRequest, @PathVariable(name = "id") int id) {
+        return ApiResponse.<UserResponse>builder()
+                .code(200)
+                .message("success")
+                .result(userService.addRoleUser(id, userRoleRequest))
                 .build();
     }
 }

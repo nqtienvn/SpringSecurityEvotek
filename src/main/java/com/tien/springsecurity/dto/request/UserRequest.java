@@ -1,6 +1,5 @@
 package com.tien.springsecurity.dto.request;
 
-import com.tien.springsecurity.entity.Role;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +15,4 @@ public class UserRequest {
     String lastName;
     String email;
     String pass;
-//    Role role;
 }

@@ -3,13 +3,13 @@ package com.tien.springsecurity.dto.request;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthenticationRequest {
-    String email;
-    String pass;
+@Builder
+public class PermissionRequest {
+    String name;
+    String description;
 }

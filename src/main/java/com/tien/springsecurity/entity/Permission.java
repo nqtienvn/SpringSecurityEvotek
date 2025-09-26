@@ -1,23 +1,18 @@
 package com.tien.springsecurity.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Set;
 @Entity
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Role {
+public class Permission {
     @Id
     String name;
     String description;
-    @ManyToMany(fetch =  FetchType.EAGER)
-    Set<Permission> permissions;
 }

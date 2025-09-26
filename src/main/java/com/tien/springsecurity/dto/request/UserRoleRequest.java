@@ -1,6 +1,5 @@
-package com.tien.springsecurity.dto.response;
+package com.tien.springsecurity.dto.request;
 
-import com.tien.springsecurity.entity.Role;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,12 +12,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserResponse {
-    int id;
-    String firstName;
-    String lastName;
-    String email;
-    String pass;
-    Set<Role> roles;
+public class UserRoleRequest {
+    Set<String> roleName;
 }
-
