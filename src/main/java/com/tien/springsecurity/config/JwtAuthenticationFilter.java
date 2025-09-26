@@ -76,7 +76,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 //Gắn thêm chi tiết từ request (ví dụ: IP, session ID, User-Agent...).
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
-
         }
         //nếu mà nó chưa có token thì sẽ 403 hoạc đã xác thực thì chuyển qua controller luôn
         filterChain.doFilter(request, response);

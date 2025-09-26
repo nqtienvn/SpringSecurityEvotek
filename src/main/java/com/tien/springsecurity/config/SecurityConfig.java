@@ -33,6 +33,7 @@ public class SecurityConfig {
     UserDetailsService userDetailsService;
     JwtAuthenticationFilter jwtAuthFilter;
     UserPemission userPemission;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
@@ -47,12 +48,14 @@ public class SecurityConfig {
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return httpSecurity.build();
     }
+
     @Bean
     public MethodSecurityExpressionHandler createExpressionHandler() {
         DefaultMethodSecurityExpressionHandler evaluator = new DefaultMethodSecurityExpressionHandler();
         evaluator.setPermissionEvaluator(userPemission);
         return evaluator;
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
